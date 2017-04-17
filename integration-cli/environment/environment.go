@@ -17,8 +17,8 @@ import (
 )
 
 const (
-	// DefaultDockerBinary is the name of the docker binary
-	DefaultDockerBinary = "docker"
+	// DefaultClientBinary is the name of the docker binary
+	DefaultClientBinary = "moby-test-client"
 )
 
 // Execution holds informations about the test execution environment.
@@ -99,11 +99,7 @@ func New() (*Execution, error) {
 		}
 	}
 
-	var dockerBinary = DefaultDockerBinary
-	if dockerBin := os.Getenv("DOCKER_BINARY"); dockerBin != "" {
-		dockerBinary = dockerBin
-	}
-	dockerBinary, err = exec.LookPath(dockerBinary)
+	dockerBinary, err := exec.LookPath(DefaultClientBinary)
 	if err != nil {
 		return nil, err
 	}

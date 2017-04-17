@@ -37,7 +37,7 @@ var (
 	testEnv *environment.Execution
 
 	// the docker client binary to use
-	dockerBinary = "docker"
+	dockerBinary = ""
 )
 
 func init() {

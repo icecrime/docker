@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+DEFAULT_GO_PKG=github.com/docker/cli/cmd/docker
+
+CLIENT_GO_PKG=${TEST_CLIENT_GO_PACKAGE:-$DEFAULT_GO_PKG}
+CLIENT_BINARY="/tmp/$CLIENT_GO_PKG/moby-test-client"
+
+if [ ! -x $CLIENT_BINARY ]; then
+	go get -d ${CLIENT_GO_PKG}
+	go build -o $CLIENT_BINARY ${CLIENT_GO_PKG}
+fi
+
+export TEST_CLIENT_BINARY=$CLIENT_BINARY
+export PATH="$PATH:$(dirname $TEST_CLIENT_BINARY)"
